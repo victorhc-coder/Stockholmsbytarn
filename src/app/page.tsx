@@ -17,23 +17,28 @@ async function getLatestListings(): Promise<Listing[]> {
 const HOW_IT_WORKS = [
   {
     step: '01',
+    title: 'Skapa konto',
+    desc: 'Registrera dig gratis med din e-postadress. Det tar bara en minut.',
+  },
+  {
+    step: '02',
     title: 'Lägg upp din annons',
     desc: 'Beskriv din lägenhet, ladda upp bilder och ange vad du söker i ett byte.',
   },
   {
-    step: '02',
+    step: '03',
     title: 'Hitta en match',
-    desc: 'Bläddra bland annonser och filtrera på stadsdel, rum och hyra.',
+    desc: 'Bläddra bland annonser och filtrera på stadsdel, storlek, hyra och mycket mer.',
   },
   {
-    step: '03',
+    step: '04',
     title: 'Ta kontakt direkt',
     desc: 'Skicka ett meddelande till annonsören och boka en visning.',
   },
   {
-    step: '04',
+    step: '05',
     title: 'Byt lägenhet',
-    desc: 'Genomför bytet och flytta in i din nya hemstad — helt gratis.',
+    desc: 'Genomför bytet och flytta in i din nya lägenhet.',
   },
 ]
 
@@ -121,10 +126,10 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="section-title">Så här fungerar det</h2>
-            <p className="text-gray-500 mt-2">Fyra enkla steg till din nya lägenhet</p>
+            <p className="text-gray-500 mt-2">Fem enkla steg till din nya lägenhet</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             {HOW_IT_WORKS.map(item => (
               <div key={item.step} className="relative">
                 <div className="bg-gray-50 rounded-3xl p-6 h-full">
