@@ -27,6 +27,7 @@ export default function Footer() {
                 { href: '/karta', label: 'Annonser på karta' },
                 { href: '/lagg-upp', label: 'Lägg upp annons' },
                 { href: '/logga-in', label: 'Logga in' },
+                { href: '/registrera', label: 'Skapa konto' },
               ].map(link => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-sm text-gray-500 hover:text-brand-600 transition-colors">
