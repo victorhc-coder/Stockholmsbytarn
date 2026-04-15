@@ -63,8 +63,9 @@ export default async function HomePage() {
           </h1>
 
           <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Tryggt och gratis. Hitta din nästa lägenhet genom direktbyte med
-            andra stockholmare — utan mäklare, utan avgifter.
+            Stockholmsbytarn är en kostnadsfri plattform som låter dig leta i lugn och ro
+            och se vad som dyker upp över tid. När rätt möjlighet kommer byter du med andra
+            stockholmare, helt utan avgifter.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">

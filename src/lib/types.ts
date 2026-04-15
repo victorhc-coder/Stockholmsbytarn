@@ -34,6 +34,8 @@ export interface Listing {
   images: string[]
   status: ListingStatus
   views: number
+  lat: number | null
+  lng: number | null
   created_at: string
   updated_at: string
   profiles?: Profile

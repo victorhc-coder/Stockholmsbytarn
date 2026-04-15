@@ -64,6 +64,8 @@ create table public.listings (
   move_in_date  date,
   wants_desc    text,                    -- vad man söker i byte
   images        text[] default '{}',    -- Supabase Storage-URLer
+  lat           double precision,       -- Geocodad latitud (Nominatim)
+  lng           double precision,       -- Geocodad longitud (Nominatim)
   status        public.listing_status default 'active' not null,
   views         int default 0 not null,
   created_at    timestamptz default now() not null,

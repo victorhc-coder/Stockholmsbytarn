@@ -24,6 +24,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {[
                 { href: '/annonser', label: 'Bläddra annonser' },
+                { href: '/karta', label: 'Annonser på karta' },
                 { href: '/lagg-upp', label: 'Lägg upp annons' },
                 { href: '/logga-in', label: 'Logga in' },
               ].map(link => (
@@ -39,10 +40,18 @@ export default function Footer() {
           {/* Info */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 mb-3">Om oss</h3>
-            <p className="text-sm text-gray-500 leading-relaxed">
-              Stockholmsbytarn är en fri plattform som hjälper stockholmare att
-              byta hyresrätt direkt med varandra, utan mäklare eller avgifter.
-            </p>
+            <ul className="space-y-2 mb-3">
+              {[
+                { href: '/om-oss', label: 'Om Stockholmsbytarn' },
+                { href: '/hur-det-fungerar', label: 'Hur det fungerar' },
+              ].map(link => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-sm text-gray-500 hover:text-brand-600 transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 

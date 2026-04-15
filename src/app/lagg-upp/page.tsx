@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import ImageUpload from '@/components/ImageUpload'
 import { STADSDELAR, ROOMS_OPTIONS, type Stadsdel } from '@/lib/types'
+import { geocodeAddress } from '@/lib/geocode'
 import type { User } from '@supabase/supabase-js'
 
 interface FormData {
@@ -62,6 +63,10 @@ export default function LaggUppPage() {
     }
 
     setSaving(true)
+
+    // Geocode the address — fail gracefully if it doesn't work
+    const coords = await geocodeAddress(form.address.trim())
+
     const { data, error } = await supabase.from('listings').insert({
       user_id: user.id,
       title: form.title.trim(),
@@ -77,6 +82,8 @@ export default function LaggUppPage() {
       wants_desc: form.wants_desc.trim() || null,
       move_in_date: form.move_in_date || null,
       images: form.images,
+      lat: coords?.lat ?? null,
+      lng: coords?.lng ?? null,
       status: 'active',
     }).select().single()
 
@@ -124,6 +131,9 @@ export default function LaggUppPage() {
                 onChange={e => set('address', e.target.value)}
                 placeholder="Gatugatan 1, Stockholm"
                 className="input" required />
+              <p className="text-xs text-gray-400 mt-1.5">
+                Adressen används för att placera din annons på rätt plats på kartan.
+              </p>
             </div>
 
             <div>
