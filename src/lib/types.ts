@@ -32,6 +32,9 @@ export interface Listing {
   move_in_date: string | null
   wants_desc: string | null
   images: string[]
+  balcony: boolean | null
+  elevator: boolean | null
+  pets_allowed: boolean | null
   status: ListingStatus
   views: number
   lat: number | null

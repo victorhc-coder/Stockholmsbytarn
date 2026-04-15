@@ -64,6 +64,9 @@ create table public.listings (
   move_in_date  date,
   wants_desc    text,                    -- vad man söker i byte
   images        text[] default '{}',    -- Supabase Storage-URLer
+  balcony       boolean,               -- Har balkong
+  elevator      boolean,               -- Hiss i huset
+  pets_allowed  boolean,               -- Husdjur tillåtet
   lat           double precision,       -- Geocodad latitud (Nominatim)
   lng           double precision,       -- Geocodad longitud (Nominatim)
   status        public.listing_status default 'active' not null,

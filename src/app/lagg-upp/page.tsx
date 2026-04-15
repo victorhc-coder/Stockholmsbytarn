@@ -24,12 +24,16 @@ interface FormData {
   wants_desc: string
   move_in_date: string
   images: string[]
+  balcony: '' | 'true' | 'false'
+  elevator: '' | 'true' | 'false'
+  pets_allowed: '' | 'true' | 'false'
 }
 
 const INITIAL: FormData = {
   title: '', address: '', stadsdel: '', size_sqm: '', rooms: '',
   monthly_rent: '', floor: '', total_floors: '', description: '',
   floor_plan: '', wants_desc: '', move_in_date: '', images: [],
+  balcony: '', elevator: '', pets_allowed: '',
 }
 
 export default function LaggUppPage() {
@@ -82,6 +86,9 @@ export default function LaggUppPage() {
       wants_desc: form.wants_desc.trim() || null,
       move_in_date: form.move_in_date || null,
       images: form.images,
+      balcony:      form.balcony      === '' ? null : form.balcony      === 'true',
+      elevator:     form.elevator     === '' ? null : form.elevator     === 'true',
+      pets_allowed: form.pets_allowed === '' ? null : form.pets_allowed === 'true',
       lat: coords?.lat ?? null,
       lng: coords?.lng ?? null,
       status: 'active',
@@ -194,6 +201,38 @@ export default function LaggUppPage() {
               <input id="move_in_date" type="date" value={form.move_in_date}
                 onChange={e => set('move_in_date', e.target.value)}
                 className="input" />
+            </div>
+          </div>
+        </section>
+
+        {/* Faciliteter */}
+        <section className="bg-white rounded-3xl shadow-card p-6">
+          <h2 className="font-semibold text-gray-900 mb-1">Faciliteter</h2>
+          <p className="text-sm text-gray-500 mb-5">Lämna tomt om du är osäker — det går att uppdatera senare.</p>
+          <div className="grid grid-cols-3 gap-3">
+            <div>
+              <label className="label">Balkong</label>
+              <select value={form.balcony} onChange={e => set('balcony', e.target.value as FormData['balcony'])} className="input">
+                <option value="">Ej angivet</option>
+                <option value="true">Ja</option>
+                <option value="false">Nej</option>
+              </select>
+            </div>
+            <div>
+              <label className="label">Hiss</label>
+              <select value={form.elevator} onChange={e => set('elevator', e.target.value as FormData['elevator'])} className="input">
+                <option value="">Ej angivet</option>
+                <option value="true">Ja</option>
+                <option value="false">Nej</option>
+              </select>
+            </div>
+            <div>
+              <label className="label">Husdjur tillåtet</label>
+              <select value={form.pets_allowed} onChange={e => set('pets_allowed', e.target.value as FormData['pets_allowed'])} className="input">
+                <option value="">Ej angivet</option>
+                <option value="true">Ja</option>
+                <option value="false">Nej</option>
+              </select>
             </div>
           </div>
         </section>
