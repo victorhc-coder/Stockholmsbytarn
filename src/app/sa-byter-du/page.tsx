@@ -7,10 +7,12 @@ export const metadata: Metadata = {
     'Allt du behöver veta om direktbyte av hyresrätt i Stockholm — regler, krav, olika typer av byten och hur du hittar rätt match.',
 }
 
+// ── Data ──────────────────────────────────────────────────────────────────────
+
 const SWAP_TYPES = [
   {
     title: 'Direktbyte',
-    sub: '2 parter',
+    badge: '2 parter',
     desc: 'Det vanligaste bytet. Du och en annan hyresgäst byter lägenheter direkt med varandra. Enkelt och rakt på sak.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -22,7 +24,7 @@ const SWAP_TYPES = [
   },
   {
     title: 'Trepartsbyte',
-    sub: '3 parter',
+    badge: '3 parter',
     desc: 'Tre hyresgäster byter i en kedja. Person A flyttar till B:s lägenhet, B till C:s och C till A:s. Kräver att alla tre är överens och godkänns av respektive hyresvärd.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -34,7 +36,7 @@ const SWAP_TYPES = [
   },
   {
     title: '2 mot 1-byte',
-    sub: 'En stor mot två mindre',
+    badge: 'En stor mot två mindre',
     desc: 'En hyresgäst med en stor lägenhet byter mot två mindre lägenheter. Passar till exempel den som vill dela upp ett stort boende efter en separation.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -46,11 +48,11 @@ const SWAP_TYPES = [
   },
 ]
 
-const colorMap: Record<string, { bg: string; text: string; border: string }> = {
-  brand:  { bg: 'bg-brand-50',  text: 'text-brand-600',  border: 'border-brand-100'  },
-  indigo: { bg: 'bg-indigo-50', text: 'text-indigo-600', border: 'border-indigo-100' },
-  teal:   { bg: 'bg-teal-50',   text: 'text-teal-600',   border: 'border-teal-100'   },
-}
+const COLOR = {
+  brand:  { iconBg: 'bg-brand-50',  iconText: 'text-brand-600',  badge: 'bg-brand-50 text-brand-700'  },
+  indigo: { iconBg: 'bg-indigo-50', iconText: 'text-indigo-600', badge: 'bg-indigo-50 text-indigo-700' },
+  teal:   { iconBg: 'bg-teal-50',   iconText: 'text-teal-600',   badge: 'bg-teal-50 text-teal-700'    },
+} as const
 
 const REQUIREMENTS = [
   {
@@ -133,24 +135,26 @@ const HOW_STEPS = [
   },
 ]
 
+// ── Page ──────────────────────────────────────────────────────────────────────
+
 export default function SaByterdPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
 
-      {/* Hero */}
+      {/* ── Hero ── */}
       <div className="text-center mb-16">
         <h1 className="font-serif text-4xl md:text-5xl text-gray-900 mb-4 leading-tight">
           Så byter du lägenhet
         </h1>
-        <p className="text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-lg text-gray-500 max-w-xl mx-auto leading-relaxed">
           Allt du behöver veta om direktbyte av hyresrätt i Stockholm.
         </p>
       </div>
 
-      {/* Section 1 — Vad är ett lägenhetsbyte? */}
-      <section className="mb-14">
+      {/* ── 1. Vad är ett lägenhetsbyte? ── */}
+      <section className="mb-16">
         <div className="bg-white rounded-3xl shadow-card p-8 md:p-10">
-          <h2 className="font-serif text-2xl md:text-3xl text-gray-900 mb-4">
+          <h2 className="font-serif text-2xl md:text-3xl text-gray-900 mb-5">
             Vad är ett lägenhetsbyte?
           </h2>
           <p className="text-gray-600 leading-relaxed mb-4">
@@ -166,81 +170,103 @@ export default function SaByterdPage() {
         </div>
       </section>
 
-      {/* Section 2 — Typer av byten */}
-      <section className="mb-14">
-        <h2 className="font-serif text-2xl md:text-3xl text-gray-900 mb-6">
-          Olika typer av byten
-        </h2>
+      {/* ── 2. Typer av byten ── */}
+      <section className="mb-16">
+        <div className="mb-7">
+          <h2 className="font-serif text-2xl md:text-3xl text-gray-900 mb-2">
+            Olika typer av byten
+          </h2>
+          <p className="text-gray-500">Välj den bytesform som passar din situation.</p>
+        </div>
+
         <div className="grid sm:grid-cols-3 gap-5">
           {SWAP_TYPES.map(item => {
-            const c = colorMap[item.color]
+            const c = COLOR[item.color as keyof typeof COLOR]
             return (
-              <div key={item.title} className={`bg-white rounded-3xl shadow-card p-6 border ${c.border}`}>
-                <div className={`w-11 h-11 rounded-xl ${c.bg} ${c.text} flex items-center justify-center mb-4`}>
-                  {item.icon}
+              <div key={item.title} className="bg-white rounded-3xl shadow-card p-7 flex flex-col">
+                {/* Top row: icon + badge */}
+                <div className="flex items-start justify-between mb-5">
+                  <div className={`w-12 h-12 rounded-2xl ${c.iconBg} ${c.iconText} flex items-center justify-center`}>
+                    {item.icon}
+                  </div>
+                  <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${c.badge}`}>
+                    {item.badge}
+                  </span>
                 </div>
-                <div className={`text-xs font-semibold tracking-wide uppercase ${c.text} mb-1`}>
-                  {item.sub}
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+                <h3 className="font-semibold text-gray-900 text-lg mb-2">{item.title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed flex-1">{item.desc}</p>
               </div>
             )
           })}
         </div>
       </section>
 
-      {/* Section 3 — Krav */}
-      <section className="mb-14">
-        <div className="bg-white rounded-3xl shadow-card p-8 md:p-10">
+      {/* ── 3. Krav ── */}
+      <section className="mb-16">
+        <div className="mb-7">
           <h2 className="font-serif text-2xl md:text-3xl text-gray-900 mb-2">
             Vad krävs för att få byta?
           </h2>
-          <p className="text-gray-500 mb-8 leading-relaxed">
+          <p className="text-gray-500 leading-relaxed">
             Hyresvärden kan inte neka ett byte utan giltiga skäl — men det finns ett antal
             grundkrav som brukar gälla. Kontrollera med din hyresvärd om du är osäker.
           </p>
-          <div className="grid sm:grid-cols-2 gap-5">
-            {REQUIREMENTS.map(req => (
-              <div key={req.title} className="flex gap-4">
-                <div className="w-9 h-9 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center shrink-0 mt-0.5">
-                  {req.icon}
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-0.5">{req.title}</h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">{req.desc}</p>
-                </div>
+        </div>
+
+        {/* 6-card grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-5">
+          {REQUIREMENTS.map(req => (
+            <div key={req.title} className="bg-white rounded-2xl shadow-card p-5 flex gap-4">
+              <div className="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center shrink-0">
+                {req.icon}
               </div>
-            ))}
+              <div>
+                <h3 className="font-semibold text-gray-900 text-sm mb-1">{req.title}</h3>
+                <p className="text-xs text-gray-500 leading-relaxed">{req.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Tips box — blue background */}
+        <div className="bg-brand-50 border border-brand-100 rounded-2xl p-5 flex gap-3 items-start">
+          <div className="w-8 h-8 rounded-lg bg-white shadow-sm text-brand-500 flex items-center justify-center shrink-0 mt-0.5">
+            {/* Lightbulb */}
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m1.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
           </div>
-          <div className="mt-8 pt-6 border-t border-gray-100">
-            <p className="text-sm text-gray-400 leading-relaxed">
-              <strong className="text-gray-600">Tips:</strong> Är du osäker på dina rättigheter?
-              Hyresgästföreningen erbjuder gratis rådgivning till sina medlemmar.
-            </p>
-          </div>
+          <p className="text-sm text-brand-800 leading-relaxed">
+            <strong className="font-semibold">Tips:</strong> Är du osäker på dina rättigheter?
+            Hyresgästföreningen erbjuder gratis rådgivning till sina medlemmar.
+          </p>
         </div>
       </section>
 
-      {/* Section 4 — Så fungerar Stockholmsbytarn */}
-      <section className="mb-14">
-        <h2 className="font-serif text-2xl md:text-3xl text-gray-900 mb-6">
-          Så fungerar Stockholmsbytarn
-        </h2>
+      {/* ── 4. Så fungerar Stockholmsbytarn ── */}
+      <section className="mb-16">
+        <div className="mb-7">
+          <h2 className="font-serif text-2xl md:text-3xl text-gray-900 mb-2">
+            Så fungerar Stockholmsbytarn
+          </h2>
+          <p className="text-gray-500">Tre steg från annons till inflytt.</p>
+        </div>
+
         <div className="grid sm:grid-cols-3 gap-5">
           {HOW_STEPS.map(item => (
-            <div key={item.step} className="bg-white rounded-3xl shadow-card p-6">
-              <div className="font-serif text-4xl text-brand-100 font-bold mb-3 leading-none">
+            <div key={item.step} className="bg-white rounded-3xl shadow-card p-7">
+              <div className="font-serif text-6xl font-bold text-brand-100 leading-none mb-4 select-none">
                 {item.step}
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">{item.title}</h3>
+              <h3 className="font-semibold text-gray-900 text-base mb-2">{item.title}</h3>
               <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* CTA */}
+      {/* ── CTA ── */}
       <div className="bg-gradient-to-br from-brand-500 to-brand-700 rounded-4xl p-10 md:p-14 text-center text-white">
         <h2 className="font-serif text-2xl md:text-3xl mb-3">
           Redo att hitta ditt nästa hem?
