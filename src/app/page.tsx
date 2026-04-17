@@ -31,17 +31,17 @@ const HOW_IT_WORKS = [
   {
     step: '03',
     title: 'Hitta en match',
-    desc: 'Bläddra bland annonser och filtrera på stadsdel, storlek, hyra och mycket mer.',
+    desc: 'Sök bland annonser och filtrera efter det du söker.',
   },
   {
     step: '04',
     title: 'Ta kontakt direkt',
-    desc: 'Skicka ett meddelande till annonsören och boka en visning.',
+    desc: 'Hör av dig direkt till annonsören och kom överens om ett besök.',
   },
   {
     step: '05',
     title: 'Byt lägenhet',
-    desc: 'Genomför bytet och flytta in i din nya lägenhet.',
+    desc: 'Ansök om bytestillstånd hos dina och motpartens hyresvärd — och börja packa.',
   },
 ]
 
