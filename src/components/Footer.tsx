@@ -45,6 +45,7 @@ export default function Footer() {
               {[
                 { href: '/om-oss', label: 'Om Stockholmsbytarn' },
                 { href: '/hur-det-fungerar', label: 'Hur det fungerar' },
+                { href: '/sa-byter-du', label: 'Så byter du lägenhet' },
               ].map(link => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-sm text-gray-500 hover:text-brand-600 transition-colors">
