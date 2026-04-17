@@ -45,11 +45,6 @@ const HOW_IT_WORKS = [
   },
 ]
 
-const STATS = [
-  { value: '100%', label: 'Gratis att använda' },
-  { value: 'Direkt', label: 'Byte utan mäklare' },
-  { value: 'Stockholm', label: 'Hela staden' },
-]
 
 const TRUST = [
   {
@@ -130,15 +125,6 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          {/* Stats */}
-          <div className="flex flex-wrap justify-center gap-8 mt-14">
-            {STATS.map(stat => (
-              <div key={stat.label} className="text-center">
-                <div className="font-serif text-2xl font-bold text-brand-600">{stat.value}</div>
-                <div className="text-sm text-gray-500 mt-0.5">{stat.label}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
