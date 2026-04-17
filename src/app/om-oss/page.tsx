@@ -26,14 +26,11 @@ export default function OmOssPage() {
       <div className="space-y-10">
         <div className="bg-white rounded-3xl shadow-card p-8 md:p-10">
           <h2 className="font-serif text-2xl text-gray-900 mb-4">Varför Stockholmsbytarn?</h2>
-          <p className="text-gray-600 leading-relaxed mb-4">
-            Bostadsmarknaden i Stockholm är tuff. Långa köer, höga priser och mäklare som tar
-            stora avgifter gör det svårt att hitta rätt bostad. Vi tror att det finns ett bättre sätt.
-          </p>
           <p className="text-gray-600 leading-relaxed">
-            Stockholmsbytarn ger hyresrättsinnehavare möjligheten att hitta varandra direkt —
-            utan mellanhänder, utan avgifter, utan tidspress. Du lägger upp din annons, bläddrar
-            bland andra och tar kontakt när du hittar någon med rätt lägenhet för dig.
+            I Stockholm kan det ta år att hitta rätt bostad — dessutom är det dyrt över tid.
+            Vi tyckte att det var fel. Stockholmsbytarn är helt gratis, alltid. Du lägger upp
+            din annons utan kostnad och låter den ligga kvar så länge du vill. Ingen tidspress,
+            inga avgifter — och när rätt person dyker upp tar ni kontakt direkt med varandra.
           </p>
         </div>
 
