@@ -29,7 +29,6 @@ export default function Navbar() {
 
   const navLinks = [
     { href: '/annonser', label: 'Bläddra annonser' },
-    { href: '/karta', label: 'Karta' },
     { href: '/sa-byter-du', label: 'Så byter du' },
     { href: '/lagg-upp', label: 'Lägg upp annons' },
   ]

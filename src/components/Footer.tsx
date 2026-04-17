@@ -24,7 +24,6 @@ export default function Footer() {
             <ul className="space-y-2">
               {[
                 { href: '/annonser', label: 'Bläddra annonser' },
-                { href: '/karta', label: 'Annonser på karta' },
                 { href: '/lagg-upp', label: 'Lägg upp annons' },
                 { href: '/logga-in', label: 'Logga in' },
                 { href: '/registrera', label: 'Skapa konto' },
