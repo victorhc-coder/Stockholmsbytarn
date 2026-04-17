@@ -1,7 +1,5 @@
-import { Suspense } from 'react'
 import { createClient } from '@/lib/supabase/server'
-import ListingCard from '@/components/ListingCard'
-import SearchFilters from '@/components/SearchFilters'
+import AnnonserLayout, { type FilterState } from './AnnonserLayout'
 import type { Listing, Stadsdel } from '@/lib/types'
 
 interface SearchParams {
@@ -10,16 +8,15 @@ interface SearchParams {
   rum_min?:  string
   hyra_max?: string
   sort?:     string
-  vagning?:  string  // '1-3' | '4-6' | '7+'
-  balkong?:  string  // 'ja' | 'nej'
-  hiss?:     string  // 'ja' | 'nej'
-  husdjur?:  string  // 'ja' | 'nej'
+  vagning?:  string
+  balkong?:  string
+  hiss?:     string
+  husdjur?:  string
 }
 
-async function getListings(filters: SearchParams): Promise<Listing[]> {
+async function getListings(f: SearchParams): Promise<Listing[]> {
   const supabase = await createClient()
 
-  // Determine sort order
   type Col = 'created_at' | 'monthly_rent' | 'size_sqm'
   const sortMap: Record<string, { col: Col; asc: boolean }> = {
     nyast:      { col: 'created_at',   asc: false },
@@ -28,38 +25,34 @@ async function getListings(filters: SearchParams): Promise<Listing[]> {
     storst:     { col: 'size_sqm',     asc: false },
     minst:      { col: 'size_sqm',     asc: true  },
   }
-  const { col, asc } = sortMap[filters.sort ?? ''] ?? sortMap.nyast
+  const { col, asc } = sortMap[f.sort ?? ''] ?? sortMap.nyast
 
-  let query = supabase
+  let q = supabase
     .from('listings')
     .select('*, profiles(name, avatar_url)')
     .eq('status', 'active')
     .order(col, { ascending: asc })
 
-  // Basic filters
-  if (filters.stadsdel) query = query.eq('stadsdel', filters.stadsdel as Stadsdel)
-  if (filters.rum_min)  query = query.gte('rooms', parseFloat(filters.rum_min))
-  if (filters.hyra_max) query = query.lte('monthly_rent', parseInt(filters.hyra_max))
-  if (filters.q) {
-    query = query.or(
-      `title.ilike.%${filters.q}%,address.ilike.%${filters.q}%,description.ilike.%${filters.q}%`
+  if (f.stadsdel) q = q.eq('stadsdel', f.stadsdel as Stadsdel)
+  if (f.rum_min)  q = q.gte('rooms', parseFloat(f.rum_min))
+  if (f.hyra_max) q = q.lte('monthly_rent', parseInt(f.hyra_max))
+  if (f.q) {
+    q = q.or(
+      `title.ilike.%${f.q}%,address.ilike.%${f.q}%,description.ilike.%${f.q}%`
     )
   }
+  if (f.vagning === '1-3') q = q.gte('floor', 1).lte('floor', 3)
+  if (f.vagning === '4-6') q = q.gte('floor', 4).lte('floor', 6)
+  if (f.vagning === '7+')  q = q.gte('floor', 7)
 
-  // Floor filter
-  if (filters.vagning === '1-3') query = query.gte('floor', 1).lte('floor', 3)
-  if (filters.vagning === '4-6') query = query.gte('floor', 4).lte('floor', 6)
-  if (filters.vagning === '7+')  query = query.gte('floor', 7)
+  if (f.balkong === 'ja')  q = q.eq('balcony', true)
+  if (f.balkong === 'nej') q = q.eq('balcony', false)
+  if (f.hiss    === 'ja')  q = q.eq('elevator', true)
+  if (f.hiss    === 'nej') q = q.eq('elevator', false)
+  if (f.husdjur === 'ja')  q = q.eq('pets_allowed', true)
+  if (f.husdjur === 'nej') q = q.eq('pets_allowed', false)
 
-  // Boolean amenity filters — only filter when explicitly set to ja/nej
-  if (filters.balkong === 'ja')  query = query.eq('balcony', true)
-  if (filters.balkong === 'nej') query = query.eq('balcony', false)
-  if (filters.hiss    === 'ja')  query = query.eq('elevator', true)
-  if (filters.hiss    === 'nej') query = query.eq('elevator', false)
-  if (filters.husdjur === 'ja')  query = query.eq('pets_allowed', true)
-  if (filters.husdjur === 'nej') query = query.eq('pets_allowed', false)
-
-  const { data } = await query.limit(48)
+  const { data } = await q.limit(100)
   return (data ?? []) as Listing[]
 }
 
@@ -68,47 +61,20 @@ export default async function AnnonserPage({
 }: {
   searchParams: Promise<SearchParams>
 }) {
-  const filters = await searchParams
-  const listings = await getListings(filters)
+  const sp = await searchParams
+  const listings = await getListings(sp)
 
-  const hasFilters =
-    filters.q || filters.stadsdel || filters.rum_min || filters.hyra_max ||
-    filters.vagning || filters.balkong || filters.hiss || filters.husdjur
+  const initialFilters: FilterState = {
+    q:        sp.q        ?? '',
+    stadsdel: sp.stadsdel ?? '',
+    rum_min:  sp.rum_min  ?? '',
+    hyra_max: sp.hyra_max ?? '',
+    sort:     sp.sort     ?? '',
+    vagning:  sp.vagning  ?? '',
+    balkong:  sp.balkong  ?? '',
+    hiss:     sp.hiss     ?? '',
+    husdjur:  sp.husdjur  ?? '',
+  }
 
-  return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div className="mb-8">
-        <h1 className="section-title mb-1">Bläddra annonser</h1>
-        <p className="text-gray-500">
-          {listings.length} {listings.length === 1 ? 'annons' : 'annonser'} i Stockholm
-          {hasFilters ? ' med dina filter' : ''}
-        </p>
-      </div>
-
-      <Suspense>
-        <SearchFilters />
-      </Suspense>
-
-      {listings.length === 0 ? (
-        <div className="text-center py-20">
-          <div className="w-16 h-16 rounded-3xl bg-gray-100 flex items-center justify-center mx-auto mb-4">
-            <svg className="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </div>
-          <h2 className="font-serif text-xl text-gray-900 mb-2">Inga annonser hittades</h2>
-          <p className="text-gray-500 text-sm">
-            {hasFilters ? 'Prova att ändra dina sökfilter' : 'Inga aktiva annonser just nu'}
-          </p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-8">
-          {listings.map(listing => (
-            <ListingCard key={listing.id} listing={listing} />
-          ))}
-        </div>
-      )}
-    </div>
-  )
+  return <AnnonserLayout listings={listings} initialFilters={initialFilters} />
 }
