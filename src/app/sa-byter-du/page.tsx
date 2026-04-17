@@ -154,15 +154,14 @@ export default function SaByterdPage() {
             Vad är ett lägenhetsbyte?
           </h2>
           <p className="text-gray-600 leading-relaxed mb-4">
-            Ett lägenhetsbyte innebär att du byter din hyresrätt direkt med en annan hyresgäst.
-            Ni tar helt enkelt över varandras kontrakt och flyttar in i varandras hem — utan att
-            gå via en mäklare eller sälja något.
+            Ett lägenhetsbyte av hyresrätt innebär att du byter ditt förstahandskontrakt mot
+            någon annans för att få en ny bostad.
           </p>
           <p className="text-gray-600 leading-relaxed">
-            För många stockholmare är direktbytet det snabbaste sättet att flytta. Istället för
-            att stå i en bostadskö i flera decennier kan du hitta rätt match redan idag — om du
-            har en lägenhet att erbjuda i utbyte. Stockholmsbytarn gör det enkelt att hitta
-            varandra.
+            För många stockholmare är direktbytet det snabbaste sättet att flytta vidare.
+            Bostadsköerna är långa och alternativen få — men har du en lägenhet att erbjuda
+            i utbyte öppnar sig en helt annan möjlighet. Stockholmsbytarn finns för att göra
+            det mötet enklare.
           </p>
         </div>
       </section>
