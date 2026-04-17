@@ -105,18 +105,18 @@ export default async function HomePage() {
             <span className="font-serif text-white text-4xl font-bold leading-none">S</span>
           </div>
 
-          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl text-gray-900 leading-tight mb-6">
+          <h1 className="animate-hero font-serif text-4xl md:text-6xl lg:text-7xl text-gray-900 leading-tight mb-6">
             Byt hyresrätt<br />
             <span className="text-brand-500">i Stockholm</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="animate-hero animate-hero-d1 text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed">
             Stockholmsbytarn är en kostnadsfri plattform som låter dig leta i lugn och ro
             och se vad som dyker upp över tid. När rätt möjlighet kommer byter du med andra
             stockholmare, helt utan avgifter.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <div className="animate-hero animate-hero-d2 flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/annonser" className="btn-primary text-base px-8 py-3.5">
               Bläddra annonser
             </Link>

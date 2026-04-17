@@ -42,7 +42,7 @@
   }
 
   .card {
-    @apply bg-white rounded-3xl shadow-card overflow-hidden transition-shadow duration-200 hover:shadow-card-hover;
+    @apply bg-white rounded-3xl shadow-card overflow-hidden transition-shadow duration-300 hover:shadow-card-hover;
   }
 
   .input {
@@ -62,6 +62,18 @@
     @apply font-serif text-3xl md:text-4xl text-gray-900;
   }
 }
+
+/* Hero fade-in animations */
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-hero {
+  animation: fadeSlideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.animate-hero-d1 { animation-delay: 0.2s; }
+.animate-hero-d2 { animation-delay: 0.4s; }
 
 /* Smooth scroll */
 html {
