@@ -17,34 +17,6 @@ async function getActiveListings(): Promise<Listing[]> {
   return (data ?? []) as Listing[]
 }
 
-const HOW_IT_WORKS = [
-  {
-    step: '01',
-    title: 'Skapa konto',
-    desc: 'Registrera dig gratis med din e-postadress. Det tar bara en minut.',
-  },
-  {
-    step: '02',
-    title: 'Lägg upp din annons',
-    desc: 'Beskriv din lägenhet, ladda upp bilder och ange vad du söker i ett byte.',
-  },
-  {
-    step: '03',
-    title: 'Hitta en match',
-    desc: 'Sök bland annonser och filtrera efter det du söker.',
-  },
-  {
-    step: '04',
-    title: 'Ta kontakt direkt',
-    desc: 'Hör av dig direkt till annonsören och kom överens om ett besök.',
-  },
-  {
-    step: '05',
-    title: 'Byt lägenhet',
-    desc: 'Ansök om bytestillstånd hos dina och motpartens hyresvärd — och börja packa.',
-  },
-]
-
 
 const TRUST = [
   {
@@ -188,21 +160,37 @@ export default async function HomePage() {
       )}
 
       {/* ── Hur det fungerar ── */}
-      <section className="bg-white py-16 md:py-20">
+      <section className="bg-gray-900 py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="section-title">Så här fungerar det</h2>
-            <p className="text-gray-500 mt-2">Fem enkla steg till din nya lägenhet</p>
+            <h2 className="font-serif text-3xl md:text-4xl text-white">Så fungerar Stockholmsbytarn</h2>
+            <p className="text-gray-400 mt-3 text-lg">Tre steg från annons till inflytt.</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            {HOW_IT_WORKS.map(item => (
-              <div key={item.step} className="relative">
-                <div className="bg-gray-50 rounded-3xl p-6 h-full">
-                  <div className="font-serif text-4xl text-brand-100 font-bold mb-3">{item.step}</div>
-                  <h3 className="font-semibold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                n: '1',
+                title: 'Lägg upp din annons',
+                desc: 'Skapa ett konto och publicera din annons på några minuter. Beskriv lägenheten, ladda upp bilder och ange vad du söker.',
+              },
+              {
+                n: '2',
+                title: 'Hitta din match',
+                desc: 'Bläddra bland aktiva annonser i hela Stockholm. Filtrera på stadsdel, storlek, hyra och mer. Se alla annonser på karta.',
+              },
+              {
+                n: '3',
+                title: 'Ta kontakt och byt',
+                desc: 'Hör av dig till annonsören direkt. Boka en visning, kom överens — och ansök om bytet hos era hyresvärdar.',
+              },
+            ].map(item => (
+              <div key={item.n} className="bg-gray-800 rounded-3xl p-8 flex flex-col">
+                <div className="font-serif text-7xl font-bold text-gray-700 leading-none mb-6 select-none">
+                  {item.n}
                 </div>
+                <h3 className="font-semibold text-white text-xl mb-3">{item.title}</h3>
+                <p className="text-gray-400 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
