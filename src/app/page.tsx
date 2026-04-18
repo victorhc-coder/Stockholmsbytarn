@@ -21,7 +21,7 @@ async function getActiveListings(): Promise<Listing[]> {
 const TRUST = [
   {
     title: 'Alltid gratis',
-    desc: 'Inga avgifter för att lägga upp annons, kontakta andra eller genomföra ett byte.',
+    desc: 'Att lägga upp en annons, kontakta andra och genomföra ett byte kostar ingenting — varken nu eller senare.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
@@ -31,7 +31,7 @@ const TRUST = [
   },
   {
     title: 'Direktkontakt',
-    desc: 'Inga mellanhänder. Du tar kontakt med annonsören direkt och hanterar bytet på egna villkor.',
+    desc: 'Du kommunicerar direkt med den du vill byta med. Inga mellanhänder, inga omvägar.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
@@ -41,7 +41,7 @@ const TRUST = [
   },
   {
     title: 'Ingen tidspress',
-    desc: 'Din annons ligger kvar så länge du vill. Leta i lugn och ro tills rätt möjlighet dyker upp.',
+    desc: 'Bostadsmarknaden tar tid — din annons är kvar tills rätt byte dyker upp.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
@@ -51,7 +51,7 @@ const TRUST = [
   },
   {
     title: 'Hela Stockholm',
-    desc: 'Annonser från alla stadsdelar — Södermalm, Östermalm, Vasastan, Bromma och allt däremellan.',
+    desc: 'Från Södermalm till Bromma, från Östermalm till Kungsholmen — hela staden på ett ställe.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
