@@ -112,23 +112,36 @@ export default async function HomePage() {
       </section>
 
       {/* ── Sök + karta ── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="text-center mb-6">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div className="text-center mb-8">
           <h2 className="section-title">Hitta din nästa lägenhet</h2>
-          <p className="text-gray-500 mt-1">
+          <p className="text-gray-500 mt-2">
             {listings.length > 0
               ? `${listings.length} aktiva annonser just nu i Stockholm`
               : 'Sök bland aktiva annonser i Stockholm'}
           </p>
         </div>
 
-        <HomeSearch />
+        <div className="bg-white rounded-4xl border border-gray-100 shadow-card p-5 md:p-7 space-y-5">
+          <HomeSearch />
 
-        <div
-          className="mt-5 rounded-3xl overflow-hidden shadow-card"
-          style={{ height: 500 }}
-        >
-          <HomeMap listings={listings} />
+          <div className="flex items-center justify-between px-1">
+            <p className="text-xs text-gray-400 flex items-center gap-1.5">
+              <svg className="w-3.5 h-3.5 text-brand-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Klicka på en pin för att se annonsen
+            </p>
+            {listings.length > 0 && (
+              <p className="text-xs text-gray-400">
+                {listings.length} annonser visas på kartan
+              </p>
+            )}
+          </div>
+
+          <div className="rounded-3xl overflow-hidden" style={{ height: 480 }}>
+            <HomeMap listings={listings} />
+          </div>
         </div>
       </section>
 
