@@ -160,14 +160,14 @@ export default async function HomePage() {
       )}
 
       {/* ── Hur det fungerar ── */}
-      <section className="bg-gray-900 py-16 md:py-24">
+      <section className="py-16 md:py-24" style={{ backgroundColor: '#f5f5f7' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="font-serif text-3xl md:text-4xl text-white">Så fungerar Stockholmsbytarn</h2>
-            <p className="text-gray-400 mt-3 text-lg">Tre steg från annons till inflytt.</p>
+          <div className="text-center mb-14">
+            <h2 className="font-serif text-3xl md:text-4xl text-gray-900">Så fungerar Stockholmsbytarn</h2>
+            <p className="text-gray-500 mt-3 text-lg">Tre steg från annons till inflytt.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
             {[
               {
                 n: '1',
@@ -184,13 +184,24 @@ export default async function HomePage() {
                 title: 'Ta kontakt och byt',
                 desc: 'Hör av dig till annonsören direkt. Boka en visning, kom överens — och ansök om bytet hos era hyresvärdar.',
               },
-            ].map(item => (
-              <div key={item.n} className="bg-gray-800 rounded-3xl p-8 flex flex-col">
-                <div className="font-serif text-7xl font-bold text-gray-700 leading-none mb-6 select-none">
-                  {item.n}
+            ].map((item, i) => (
+              <div key={item.n} className="relative flex flex-col md:flex-row md:items-start gap-4">
+                {/* Arrow between steps */}
+                {i < 2 && (
+                  <div className="hidden md:flex absolute -right-5 top-10 z-10 items-center justify-center w-10">
+                    <svg className="w-5 h-5 text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                )}
+                {/* Card */}
+                <div className="bg-white rounded-3xl shadow-card p-8 flex flex-col flex-1">
+                  <div className="font-serif text-6xl font-bold leading-none mb-6 select-none" style={{ color: '#0066cc' }}>
+                    {item.n}
+                  </div>
+                  <h3 className="font-semibold text-gray-900 text-xl mb-3">{item.title}</h3>
+                  <p className="text-gray-500 leading-relaxed">{item.desc}</p>
                 </div>
-                <h3 className="font-semibold text-white text-xl mb-3">{item.title}</h3>
-                <p className="text-gray-400 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
