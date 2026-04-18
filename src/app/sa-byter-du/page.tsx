@@ -151,21 +151,20 @@ export default function SaByterdPage() {
         </p>
       </div>
 
-      {/* ── 1. Vad är ett lägenhetsbyte? ── */}
+      {/* ── 1. Dags att byta? ── */}
       <section className="mb-16">
         <div className="bg-white rounded-3xl shadow-card p-8 md:p-10">
           <h2 className="font-serif text-2xl md:text-3xl text-gray-900 mb-5">
-            Vad är ett lägenhetsbyte?
+            Dags att byta?
           </h2>
           <p className="text-gray-600 leading-relaxed mb-4">
-            Ett lägenhetsbyte av hyresrätt innebär att du byter ditt förstahandskontrakt mot
-            någon annans för att få en ny bostad.
+            Kanske har livet förändrats. Du vill bo närmare jobbet, familjen eller bara i ett
+            nytt område. Men att stå i bostadskö i år efter år känns inte som ett alternativ.
           </p>
           <p className="text-gray-600 leading-relaxed">
-            För många stockholmare är direktbytet det snabbaste sättet att flytta vidare.
-            Bostadsköerna är långa och alternativen få — men har du en lägenhet att erbjuda
-            i utbyte öppnar sig en helt annan möjlighet. Stockholmsbytarn finns för att göra
-            det mötet enklare.
+            Har du en hyresrätt i Stockholm har du faktiskt något att erbjuda — och någon
+            annanstans i staden finns det troligtvis någon som söker precis det du har.
+            Stockholmsbytarn hjälper er hitta varandra.
           </p>
         </div>
       </section>
