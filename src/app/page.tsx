@@ -105,7 +105,7 @@ export default async function HomePage() {
             <span className="font-serif text-white text-4xl font-bold leading-none">S</span>
           </div>
 
-          <h1 className="animate-hero font-serif text-4xl md:text-6xl lg:text-7xl text-gray-900 leading-tight mb-6">
+          <h1 className="animate-hero animate-hero-d0 font-serif text-4xl md:text-6xl lg:text-7xl text-gray-900 leading-tight mb-6">
             Byt hyresrätt<br />
             <span className="text-brand-500">i Stockholm</span>
           </h1>
